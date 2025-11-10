@@ -1,0 +1,14 @@
+#!/usr/bin/with-contenv bash
+
+dpkg --add-architecture i386
+
+echo "fonts-wine \
+    libwine \
+    libwine:i386 \
+    python3-venv \
+    cabextract \
+    wine \
+    wine-binfmt \
+    winbind \
+    xauth \
+    xvfb" >> /mod-repo-packages-to-install.list
