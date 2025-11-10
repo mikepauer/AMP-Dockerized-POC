@@ -10,6 +10,8 @@
 > mikepauer/amp:wine -- Installs wine & xvcb for game containers that require windows runtimes
 > mikepauer/amp:mono -- Installs the mono runtimes for game containers that need it
 > linuxserver/mods:universal-docker -- Installs docker so it can be used by AMP
+> 
+-------------------------------------------------------------------
 
 > [!CAUTION]
 > **This is a community-made unofficial image, and is NOT endorsed by CubeCoders.**
