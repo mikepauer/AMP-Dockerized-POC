@@ -1,6 +1,6 @@
 > [!CAUTION]
-> ** THIS IS A PROOF OF CONCEPT AND NOT MEANT TO BE USED BY ANYONE WHO DOES NOT KNOW WHAT THEY ARE DOING WITH IT**
-> ** DO NOT ASK MitchTalmadge for support as he did not create this.**
+> **THIS IS A PROOF OF CONCEPT AND NOT MEANT TO BE USED BY ANYONE WHO DOES NOT KNOW WHAT THEY ARE DOING WITH IT**
+> **DO NOT ASK MitchTalmadge for support as he did not create this.**
 >
 > This proof of concept is moving MitchTalmadge's AMP-Dockerized from debian base to linuxserver's ubuntu base. This allows for moving parts of the system into optional mods.
 >
