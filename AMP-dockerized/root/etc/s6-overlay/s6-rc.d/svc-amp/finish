@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+EXIT_CODE="$1"
+SIGNAL_NUMBER="$2"
+
+if [ "$EXIT_CODE" -eq 256 ] && [ "$SIGNAL_NUMBER" -eq 15 ]; then
+  su abc --command "/usr/local/bin/ampinstmgr StopAll"
+  echo "AMP Stopped."
+fi
+
+

@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+echo "Checking file permissions..."
+chown -R ${PUID}:${PGID} /home/amp
+usermod --home /home/amp abc
+usermod --shell /bin/bash abc

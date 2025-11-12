@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+echo "Setting release stream to ${AMP_RELEASE_STREAM}..."
+su abc --command "ampinstmgr ShowInstancesList" | grep "Instance Name" | awk '{ print $4 }' | while read -r INSTANCE_NAME; do
+  RELEASE_STREAM=$(su abc --command "ampinstmgr ShowInstanceInfo \"${INSTANCE_NAME}\"" | grep "Release Stream" | awk '{ print $4 }')
+  if [ "${RELEASE_STREAM}" != "${AMP_RELEASE_STREAM}" ]; then
+    echo "Changing release stream of ${INSTANCE_NAME} from ${RELEASE_STREAM} to ${AMP_RELEASE_STREAM}..."
+    su abc --command "ampinstmgr ChangeInstanceStream \"${INSTANCE_NAME}\" ${AMP_RELEASE_STREAM} True" | grep --line-buffered -v -E '\[[-#]+\]'
+    # Since we changed release streams we have to force an upgrade
+    su abc --command "ampinstmgr UpgradeInstance \"${INSTANCE_NAME}\"" | grep --line-buffered -v -E '\[[-#]+\]'
+  fi
+done

@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [ "${AMP_AUTO_UPDATE}" = "true" ]; then
+  echo "Upgrading instances..."
+  su abc --command "ampinstmgr UpgradeAll" | grep --line-buffered -v -E '\[[-#]+\]'
+fi
+

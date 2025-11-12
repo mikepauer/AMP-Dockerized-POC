@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# Users may provide their own startup script for installing dependencies, etc.
+
+if [ -f "/home/amp/scripts/startup.sh" ]; then
+  echo "Running custom startup script..."
+  chmod +x /home/amp/scripts/startup.sh
+  /bin/bash /home/amp/scripts/startup.sh
+fi
+

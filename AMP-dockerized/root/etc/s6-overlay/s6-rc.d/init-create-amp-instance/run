@@ -1,0 +1,36 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+IPBINDING="${IPBINDING:-0.0.0.0}"
+PORT="${PORT:-8080}"
+
+
+get_main_instance_name() {
+  local instance_list
+  instance_list=$(su abc --command "ShowInstancesList" | grep "Instance Name" | awk '{ print $4 }')
+  if echo "$instance_list" | grep -q "ADS01"; then
+    echo "ADS01"
+  elif echo "$instance_list" | grep -q "Main"; then
+    echo "Main"
+  else
+    echo "null"
+  fi
+}
+
+does_main_instance_exist() {
+  local main_name
+  main_name=$(get_main_instance_name)
+  if [ "$main_name" = "null" ]; then
+    return 1
+  fi
+  return 0
+}
+
+if ! does_main_instance_exist; then
+  echo "Creating ADS instance... (This can take a while)"
+  su abc --command "ampinstmgr QuickStart \"${USERNAME}\" \"${PASSWORD}\" \"{$IPBINDING}\" \"{$PORT}\"" | grep --line-buffered -v -E '\[[-#]+\]'
+  echo "Setting ADS instance to start on boot..."
+  su abc --command "ampinstmgr ShowInstanceInfo ADS01" | grep "Start on Boot" | grep -q "No" && su abc --command "SetStartBoot ADS01 yes" || true
+fi
+
+

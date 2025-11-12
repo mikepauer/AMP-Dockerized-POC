@@ -1,11 +1,9 @@
-FROM ghcr.io/linuxserver/baseimage-ubuntu:noble
+FROM ghcr.io/linuxserver/baseimage-debian:trixie
 
 ARG VERSION
 ARG DEBIAN_FRONTEND="noninteractive"
 
 ENV AMP_AUTO_UPDATE=true
-ENV AMP_LICENCE=notset
-ENV AMP_MODULE=ADS
 ENV AMP_RELEASE_STREAM=Mainline
 ENV AMP_SUPPORT_LEVEL=UNSUPPORTED
 ENV AMP_SUPPORT_TOKEN=AST0/MTAD
@@ -27,10 +25,10 @@ RUN apt-get update && \
     libc++-dev \
     libatomic1 \
     libgdiplus \
+    libicu76 \
     liblua5.3-0 \
     libpulse-dev \
     numactl \
-    software-properties-common \
     socat \
     tmux \
     unzip \
